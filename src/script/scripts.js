@@ -130,5 +130,5 @@ function checkWin() {
 // controle de voulume:
 
     const bgm = document.getElementById('bgm');
-    bgm.volume = 0.5; // Defina o volume para 10%
+    bgm.volume = 0.1; // Defina o volume para 10%
     bgm.play();
