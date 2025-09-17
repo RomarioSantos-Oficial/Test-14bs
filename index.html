@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <title>Jogo da Memória Pokémon</title>
     <link rel="stylesheet" href="./src/css/style.css">
+    <link rel="shortcut icon" href="./src/img/pikachu.png" type="image/x-icon">
 </head>
 <body>
+
+     <audio id="bgm" loop>
+        <source src="./src/sons/02.mp3" type="audio/mp3" />
+    </audio>
+
     <h2 class="titulo">Jogo de Memória Pokémon</h2>
     <div class="topo">
         <button id="reset">Reiniciar Jogo</button>
@@ -13,7 +19,7 @@
 
     <!-- Placar -->
     <div id="scoreBoard">
-        Pontos: <span id="score">0</span>
+        Pontos: <span id="score">100</span>
     </div>
 
     <!-- Tabuleiro -->

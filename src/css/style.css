@@ -1,123 +1,99 @@
+/* Reset básico */
 * {
-    padding:0;
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
+    width: 100%;
     height: 100vh;
+    font-family: Arial, sans-serif;
+    background: url("/src/img/pokemon-fundo.jpg") no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     flex-direction: column;
-    background-image: url(/src/img/pokemon-fundo.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    justify-content: flex-start;
     align-items: center;
+    color: white;
 }
 
+/* Título */
+.titulo {
+    margin-top: 40px; /* distancia do topo */
+    font-size: 2.5em;
+    color: #000;
+    text-align: center;
+    
+}
+
+/* Botão Reiniciar */
+.topo {
+    margin: 20px 0 40px 0;
+}
+
+#reset {
+    font-family: Arial;
+    width: 200px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: aqua;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#reset:hover {
+    background-color: rgba(32, 124, 223, 0.831);
+}
+
+/* Placar fixo à esquerda */
+#scoreBoard {
+    position: fixed;
+    top: 100px; /* distância do topo */
+    left: 100px; /* distância da esquerda */
+    padding: 10px 20px;
+    font-size: 22px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px black;
+    z-index: 1000;
+}
+
+/* Tabuleiro */
 .memory-game {
     width: 90%;
     max-width: 1000px;
-    height: auto;
-    margin: 40px auto;
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* 7 cartas por linha */
     grid-template-rows: repeat(4, auto);   /* 4 linhas */
     gap: 15px;
     perspective: 1000px;
+    margin-bottom: 50px; /* distancia do final da tela */
 }
-
 
 /* Cartas */
 .card {
-    height:  160px;
     width: 120px;
-    margin: 4px;
+    height: 160px;
     position: relative;
-    box-shadow: 2px 2px 2px rgba(38, 11, 214, 0.59);
-    cursor: pointer;
-    transform: scale(1);
     transform-style: preserve-3d;
-    transition: transform .9s; 
-    border-radius: 5px;
-}
-
-.card:active{
-    transform: scale(0.97);
-    transition: transform 0.2;
-}
-
-.card-front,
-.card-back {
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  position: absolute;
-  border-radius: 5px;
-  background: rgb(21, 119, 205);
-  backface-visibility: hidden;
-}
-
-.card-front {
-    transform: rotateY( 180deg);
+    transition: transform 0.5s;
+    cursor: pointer;
 }
 
 .card.flip {
     transform: rotateY(180deg);
 }
 
-/* Título e botão */
-.topo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height:50px;
-    color: aliceblue;
-    border-radius: 15px;
-}
-
-#reset {
-    font-family:Arial;
-    width:200px; 
-    height:40px; 
-    align-items: center ;
-    justify-content: center;
-    margin:auto;
-    border-radius: 15px;
-    background-color: aqua;
-    cursor: pointer;
-}
-
-#reset:hover {
-    background-color: rgba(32, 124, 223, 0.831);
-    transition: 1s;
-}
-
-.titulo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width:640px;
-    height:50px;
-    margin:auto;
-    background-color:rgba(52, 24, 235, 0.623);
-    font-family:Arial;
-    color: aliceblue;
-    border-radius: 15px;
-}
-
-/* Placar */
-#scoreBoard {
-    font-size: 22px;
-    font-weight: bold;
-    color: yellow;
-    text-align: center;
-    margin: 15px;
-    padding: 10px;
-    background: rgba(0,0,0,0.6);
+.card img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
     border-radius: 10px;
-    width: 200px;
-    box-shadow: 2px 2px 6px black;
+    backface-visibility: hidden;
+}
+
+.card-front {
+    transform: rotateY(180deg);
 }

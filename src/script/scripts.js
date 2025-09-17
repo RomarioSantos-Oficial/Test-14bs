@@ -1,23 +1,24 @@
-const board = document.getElementById('gameBoard');
-let score = 0;
+const board = document.getElementById('gameBoard'); 
+let score = 100; // Pontuação inicial
 const scoreElement = document.getElementById('score');
+const audioWin = new Audio('./src/sons/01.mp3'); // Áudio de acerto
 
 // Lista de 14 pares
 const cardsArray = [
-    { name: 'pikachu', img: './src/ima/pikachu.png' },
-    { name: 'charmander', img: './src/img/charmander.png' },
-    { name: 'bulbasaur', img: './src/img/bulbasaur.png' },
-    { name: 'squirtle', img: './src/img/squirtle.png' },
-    { name: 'eevee', img: './src/img/eevee.png' },
-    { name: 'meowth', img: './src/img/meowth.png' },
-    { name: 'jigglypuff', img: './src/img/jigglypuff.png' },
-    { name: 'psyduck', img: './src/img/psyduck.png' },
-    { name: 'snorlax', img: './src/img/snorlax.png' },
+    { name: 'sandrewpendrive', img: './src/img/sandrewpendrive.png' },
+    { name: 'chikorita', img: './src/img/chikorita.png' },
+    { name: 'machop', img: './src/img/machop.png' },
+    { name: 'pikachu', img: './src/img/pikachu.png' },
     { name: 'gengar', img: './src/img/gengar.png' },
+    { name: 'clefa', img: './src/img/clefa.png' },
+    { name: 'jigglypuff', img: './src/img/jigglypuff.png' },
     { name: 'dragonite', img: './src/img/dragonite.png' },
-    { name: 'mewtwo', img: './src/img/mewtwo.png' },
-    { name: 'abra', img: './src/img/abra.png' },
-    { name: 'pidgey', img: './src/img/pidgey.png' }
+    { name: 'scizor', img: './src/img/scizor.png' },
+    { name: 'totodile', img: './src/img/totodile.png' },
+    { name: 'togepi', img: './src/img/togepi.png' },
+    { name: 'electrod', img: './src/img/electrod.png' },
+    { name: 'pikachucontrole', img: './src/img/pikachucontrole.png' },
+    { name: 'articuno', img: './src/img/articuno.png' }
 ];
 
 // Duplicar pares
@@ -45,12 +46,14 @@ let hasFlippedCard = false;
 let firstCard, secondCard;
 let lockBoard = false;
 
+// Atualizar pontuação
 function updateScore(points) {
     score += points;
     if (score < 0) score = 0;
     scoreElement.textContent = score;
 }
 
+// Virar carta
 function flipCard() {
     if (lockBoard) return;
     if (this === firstCard) return;
@@ -68,25 +71,30 @@ function flipCard() {
     checkForMatch();
 }
 
+// Checar pares
 function checkForMatch() {
     if (firstCard.dataset.card === secondCard.dataset.card) {
         disableCards();
-        updateScore(10);
+        updateScore(10); // +10 pontos
+        audioWin.currentTime = 0;
+        audioWin.play(); // tocar áudio ao acertar par
+        checkWin(); // verifica se todas cartas foram encontradas
     } else {
         unflipCards();
-        updateScore(-2);
+        updateScore(-2); // -2 pontos
     }
 }
 
+// Desabilitar cartas acertadas
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
     resetBoard();
 }
 
+// Virar cartas erradas
 function unflipCards() {
     lockBoard = true;
-
     setTimeout(() => {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
@@ -94,6 +102,7 @@ function unflipCards() {
     }, 1200);
 }
 
+// Reset do tabuleiro
 function resetBoard() {
     [hasFlippedCard, lockBoard] = [false, false];
     [firstCard, secondCard] = [null, null];
@@ -108,3 +117,18 @@ document.querySelectorAll('.card').forEach(card => {
 document.getElementById('reset').addEventListener('click', () => {
     location.reload();
 });
+
+// Verificar vitória
+function checkWin() {
+    const flippedCards = document.querySelectorAll('.card.flip');
+    if (flippedCards.length === gameCards.length) {
+        setTimeout(() => {
+            alert(`Parabéns! Você completou o jogo com ${score} pontos!`);
+        }, 500);
+    }
+}
+// controle de voulume:
+
+    const bgm = document.getElementById('bgm');
+    bgm.volume = 0.5; // Defina o volume para 10%
+    bgm.play();
